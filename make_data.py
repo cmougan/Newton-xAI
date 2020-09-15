@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from scipy.constants import G
+import random
+random.seed(0)
 
 def newton_equation(m1=1,m2=1,r=1,G=G):
     '''
