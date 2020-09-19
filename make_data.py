@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
 import numpy as np
-import scipy
+from scipy.constants import G
 import random
 
 random.seed(0)
 
 
-def newton_equation(m1=1, m2=1, r=1, G=scipy.constants.G):
+def newton_equation(m1=1, m2=1, r=1, G=G):
     """
     Newton´s Equation
     :param m1: Mass first body in kg
@@ -19,6 +19,10 @@ def newton_equation(m1=1, m2=1, r=1, G=scipy.constants.G):
     return G * m1 * m2 * (1 / r ** 2)
 
 
+def movement_equation(x0=1, v=1, a=1, t=1):
+    return x0 + v*t + 0.5 * a * t*t
+
+
 def make_newton(
     samples=100,
     m1_min=0.001,
@@ -27,7 +31,7 @@ def make_newton(
     m2_max=1,
     r_min=1,
     r_max=10,
-    G=scipy.constants.G,
+    G=G,
     dataframe=True,
 ):
     """
@@ -54,3 +58,33 @@ def make_newton(
     else:
         return data
 
+
+def make_movement_data(
+    samples=100,
+    x0_min=1,
+    x0_max=2,
+    v_min=1,
+    v_max=2,
+    a_min=1,
+    a_max=2,
+    t_min=1,
+    t_max=2,
+    dataframe=True,
+):
+    data = []
+    for n in range(samples):
+        x0 = (x0_max - x0_min) * np.random.random() + x0_min
+        v = (v_max - v_min) * np.random.random() + v_min
+        a = (a_max - a_min) * np.random.random() + a_min
+        t = (t_max - t_min) * np.random.random() + t_min
+
+        data.append([x0, v, a, t, movement_equation(x0=x0, v=v, a=a, t=t)])
+    if dataframe:
+        return pd.DataFrame(data=data, columns=["x0", "v", "a", "t", "pos"])
+    else:
+        return data
+
+
+if __name__ == "__main__":
+
+    data = make_movement_data(samples=1_000)
