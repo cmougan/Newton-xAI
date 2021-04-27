@@ -16,5 +16,6 @@ make notebook_memory_usage:
 	conda install -c conda-forge jupyter-resource-usage
 
 make install_some_packages:
+	conda install -c anaconda ipykernel
 	conda install pip
 	pip install jedi==0.17.2
