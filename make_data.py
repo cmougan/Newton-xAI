@@ -20,7 +20,7 @@ def newton_equation(m1=1, m2=1, r=1, G=G):
 
 
 def movement_equation(x0=1, v=1, a=1, t=1):
-    return x0 + v*t + 0.5 * a * t*t
+    return x0 + v * t + 0.5 * a * t * t
 
 
 def make_newton(
