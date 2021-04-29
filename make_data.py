@@ -83,8 +83,3 @@ def make_movement_data(
         return pd.DataFrame(data=data, columns=["x0", "v", "a", "t", "pos"])
     else:
         return data
-
-
-if __name__ == "__main__":
-
-    data = make_movement_data(samples=1_000)
